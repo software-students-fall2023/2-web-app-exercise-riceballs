@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add gun</title>
+    <style>
+        @font-face {
+            font-family: 'title';
+            src: url('./static/bd.otf');
+        }
+
+        @font-face {
+            font-family: 'text';
+            src: url('./static/kupole.ttf');
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #6baee8;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            overflow: hidden;
+        }
+        
+        .container {
+            background-color: #FFC0CB;
+            max-width: 600px;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 50px auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-family: 'title','Helvetica';
+            font-size: 100px;
+            color: #6baee8;
+        }
+
+        p {
+            font-family: 'text','Helvetica';
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-family: 'text','Helvetica';
+        }
+        
+        input[type="text"], 
+        input[type="number"], 
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        input[type="submit"] {
+            background-color: #6baee8;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .flex-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        #animatedCar {
+            position: absolute;
+            left: -100%;
+            bottom: 10%;
+            animation: moveCar 5s linear infinite;
+        }
+        
+        @keyframes moveCar {
+            to {
+                left: 100%;
+            }
+        }
+        
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>add a Gun</h2>
+
+        <div class="flex-container">
+            <img src="{{ url_for('static', filename='gunspin.gif') }}" onclick="playMusic()">
+            <p>click the gun for a surprise</p>
+        </div>
+
+        <form action="/submit-gun" method="post" enctype="multipart/form-data">
+
+            <div class="input-group">
+                <label for="gun-image">Image:</label>
+                <input type="file" id="gun-image" name="gun-image" accept=".gif">
+            </div>
+
+            <div class="input-group">
+                <label for="gun-name">Name:</label>
+                <input type="text" id="gun-name" name="gun-name" placeholder="Enter gun name" required>
+            </div>
+
+            <div class="input-group">
+                <label for="gun-description">Description:</label>
+                <textarea id="gun-description" name="gun-description" placeholder="Enter gun description" rows="4"></textarea>
+            </div>
+
+            <div class="input-group">
+                <label for="gun-price">Price ($):</label>
+                <input type="number" id="gun-price" name="gun-price" placeholder="0.00" step="0.01" min="0" required>
+            </div>
+
+            <div class="input-group">
+                <input type="submit" value="Add gun">
+            </div>
+
+        </form>
+        <img src="{{ url_for('static', filename='car.gif') }}" id="animatedCar">
+        <audio id="bgMusic" preload="auto">
+            <source src="{{ url_for('static', filename='addGunMusic.mp3') }}" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>        
+    </div>
+
+    <script>
+        function playMusic() {
+            var audioElement = document.getElementById('bgMusic');
+            audioElement.play();
+        }
+    </script>    
+
+</body>
+
+</html>

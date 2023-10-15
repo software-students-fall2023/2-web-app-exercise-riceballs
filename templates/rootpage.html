@@ -2,26 +2,82 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>FoodTruck RootPage</title>
+    <title>FoodTruck Main Page</title>
     <!--<link rel="stylesheet" type="text/css" href="styles.css"> -->
-</head>
+    <style>
+    body {
+            background-color: #a91414;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            overflow: hidden;
+        }
+    .header {
+        background-color: #ffffff;
+        max-width: 600px;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 30px auto;
+        text-align: center;
+    }
+    .container {
+        background-color: #ffffff;
+        max-width: 1200px;
+        border-radius: 5px;
+        padding: 20px;
+        margin: 50px auto;
+        text-align: center;
+    }
+    form {
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+    .about {
+        background-color: #ffffff;
+        max-width: 800px;
+        border-radius: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        margin: 10px auto;
+    }
+    </style>
+</head> 
 <body>
+    <form action="base.html">
+        <input type="submit" style="float:right;" value="Logout" />
+    </form>
     <header>
-        <h1>Welcome to FoodTruck</h1>
-        <nav>
-            <ul>
-                
-            </ul>
-        </nav>
+        <div class="header">
+            <h1 style="text-align:center">Welcome to FoodTruck</h1>
+        </div>
     </header>
 
     <main>
-        <h2>Main Content Heading</h2>
-        <p>This is the main content of your page.</p>
-    </main>
+        <div class="container">
+            <form action="SearchCuisine.html" style="display:inline-block;">
+                <input type="submit" value="Search for Cuisine" />
+            </form>
+            <form action="ViewAllFood.html" style="display:inline-block;">
+                <input type="submit" value="View all FoodTruck reviews" />
+            </form>
+            <form action="ViewMyFood.html" style="display:inline-block;">
+                <input type="submit" value="Your FoodTruck Reviews" />
+            </form>
+            <form action="AddFoodTruck.html" style="display:inline-block;">
+                <input type="submit" value="Add New FoodTruck Review" />
+            </form>
+        </div>
+        <div class="about">
+            <h2 style="text-align:center">What is FoodTruck?</h2>
+            <p>
+                FoodTruck is our way of making the hassle of finding and trying food carts even more convenient in New York City.
+                We designed this app to make it easy for any user to find, record, and locate food carts they may enjoy or are looking to try!
+                Whether it be the casual user or hardcore foodies, our app has all the necessary components to make your needs satiated.
+            </p>
+        </div>
 
-    <footer>
-        <p>&copy; 2023 Your Website Name</p>
-    </footer>
+    </main>
 </body>
 </html>
