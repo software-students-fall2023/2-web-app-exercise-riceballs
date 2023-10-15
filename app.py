@@ -27,6 +27,31 @@ load_dotenv()  # take environment variables from .env.
 def RootPage():
     return render_template('rootpage.html')
 
+@app.route('/AddFoodTruck')
+def AddFoodPage():
+    return render_template('AddFoodTruck.html')
+
+@app.route('/EditTruck')
+def EditPage():
+    return render_template('EditTruck.html')
+
+@app.route('/individualFood')
+def individualFood():
+    return render_template('individualFood.html')
+
+@app.route('/SearchCuisine')
+def SearchCuisine():
+    return render_template('SearchCuisine.html')
+
+@app.route('/ViewAll')
+def ViewAll():
+    return render_template('ViewAll.html')
+
+
+@app.route('/ViewMyFood')
+def ViewMyFood():
+    return render_template('ViewMyFood.html')
+
 # Login
 @app.route('/', methods = ['GET', 'POST'])
 def LoginPage():
