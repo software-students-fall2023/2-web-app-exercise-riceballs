@@ -3,70 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>FoodTruck Main Page</title>
-    <!--<link rel="stylesheet" type="text/css" href="styles.css"> -->
-    <style>
-    body {
-            background-color: #a91414;
-            margin: 0;
-            padding: 20px;
-            line-height: 1.6;
-            overflow: hidden;
-        }
-    .header {
-        background-color: #ffffff;
-        max-width: 600px;
-        border-radius: 5px;
-        padding: 10px;
-        margin: 30px auto;
-        text-align: center;
-    }
-    .container {
-        background-color: #ffffff;
-        max-width: 1200px;
-        border-radius: 5px;
-        padding: 20px;
-        margin: 50px auto;
-        text-align: center;
-    }
-    form {
-        padding-left: 60px;
-        padding-right: 60px;
-    }
-    .about {
-        background-color: #ffffff;
-        max-width: 800px;
-        border-radius: 5px;
-        padding-left: 10px;
-        padding-right: 10px;
-        padding-top: 5px;
-        padding-bottom: 5px;
-        margin: 10px auto;
-    }
-    </style>
+    <link rel="stylesheet"  href="/static/style.css">
+    
 </head> 
 <body>
     <form action="base.html">
-        <input type="submit" style="float:right;" value="Logout" />
+        <input type="submit" style="float:right;" value="Logout"class="BaseNav" />
     </form>
     <header>
         <div class="header">
-            <h1 style="text-align:center">Welcome to FoodTruck</h1>
+            <a href="rootpage.html"><h1 style="text-align:center">Welcome to FoodTruck</h1></a>
         </div>
     </header>
 
     <main>
         <div class="container">
             <form action="SearchCuisine.html" style="display:inline-block;">
-                <input type="submit" value="Search for Cuisine" />
+                <input type="submit" value="Search for Cuisine" class="BaseNav"/>
             </form>
+            
             <form action="ViewAllFood.html" style="display:inline-block;">
-                <input type="submit" value="View all FoodTruck reviews" />
+                <input type="submit" value="View all FoodTruck reviews" class="BaseNav"/>
             </form>
+           
             <form action="ViewMyFood.html" style="display:inline-block;">
-                <input type="submit" value="Your FoodTruck Reviews" />
+                <input type="submit" value="Your FoodTruck Reviews" class="BaseNav"/>
             </form>
             <form action="AddFoodTruck.html" style="display:inline-block;">
-                <input type="submit" value="Add New FoodTruck Review" />
+                <input type="submit" value="Add New FoodTruck Review" class="BaseNav"/>
             </form>
         </div>
         <div class="about">

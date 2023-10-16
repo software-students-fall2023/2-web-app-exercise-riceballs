@@ -3,17 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
     <title>Add Food Truck</title>
 </head>
 <body>
+    <form action="base.html">
+        <input type="submit" style="float:right;" value="Logout" />
+    </form>
     <header>
-        <nav>
-            <ul>
-                
-            </ul>
-        </nav>
+        <div class="header">
+            <a href="rootpage.html"><h1 style="text-align:center">Welcome to FoodTruck</h1></a>
+        </div>
     </header>
-    <h1>Add Food Truck</h1>
-    
+
+    <main>
+        <div class="container">
+            <form action="SearchCuisine.html" style="display:inline-block;">
+                <input type="submit" value="Search for Cuisine" class="BaseNav"/>
+            </form>
+            
+            <form action="ViewAllFood.html" style="display:inline-block;">
+                <input type="submit" value="View all FoodTruck reviews" class="BaseNav"/>
+            </form>
+           
+            <form action="ViewMyFood.html" style="display:inline-block;">
+                <input type="submit" value="Your FoodTruck Reviews" class="BaseNav"/>
+            </form>
+            <form action="AddFoodTruck.html" style="display:inline-block;">
+                <input type="submit" value="Add New FoodTruck Review" class="BaseNav"/>
+            </form>
+        </div>
+
+        <h2> Add Food Truck</h2>
+        <div class="add-food-form">
+        <form action="/AddFoodTruck" method="POST" class="" id="AddForm">
+            <div class="food-divs">
+                <label for="user">Food Cart Name:</label>
+                <div>
+                    <input type="text" name="user" class="add-input">
+                </div>
+            </div>
+
+            <div class="food-divs">
+                <label for="Cuisine">Cuisine:</label>
+                <div>
+                    <input type="text" name="Cuisine" class="add-input">
+                </div>
+            </div>
+
+            <div class="food-divs">
+                <label for="Hours">Hours:</label>
+                <div>
+                    <input type="text" name="Hours" class="add-input">
+                </div>
+            </div>
+
+            <div class="food-divs">
+                <label for="Address">Address:</label>
+                <div>
+                    <input type="text" name="Address" class="add-input">
+                </div>
+            </div>
+
+            <div class="food-divs">
+                <label for="Price">Price:</label>
+                <div>
+                    <select name="price" id="price">
+                    <option value=""></option>
+                    <option value="LowCost">$</option>
+                    <option value="MediumCost">$$</option>
+                    <option value="HighCost">$$$</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="food-divs">
+                <label for="Vegan">is there vegan/vegetarian options:</label>
+                <div>
+                    <select name="Vegan" id="price">
+                    <option value=""></option>
+                    <option value="YesVegan">Yes</option>
+                    <option value="NoVegan">No</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="food-divs">
+                <button id="SubmitConfess" type="submit">Add Food Truck</button>
+            </div>
+
+            </form>
+        </div>
+
+
+    </main>
 </body>
 </html>
+

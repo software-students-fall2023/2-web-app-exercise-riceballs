@@ -1,7 +1,115 @@
-body{
-    background-color: aliceblue;
+body {
+    background-color: #d1ffbd;
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+    overflow: hidden;
+    font-family: 'Roboto Mono', monospace;
+}
+.header {
+    background-color: #ffffff;
+    max-width: 600px;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 30px auto;
+    text-align: center;
 }
 
-h1{
+
+.container {
+    background-color: #ffffff;
+    max-width: 1200px;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 50px auto;
     text-align: center;
+    }
+form {
+    padding-left: 60px;
+    padding-right: 60px;
+}
+.about {
+    background-color: #ffffff;
+    max-width: 800px;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 10px auto;
+}
+
+@font-face {
+    font-family: 'Roboto Mono';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/robotomono/v22/L0xuDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_gPq_ROW4AJi8SJQt.woff2) format('woff2');
+}
+
+.add-food-form{
+    display: block;
+    text-align: center;
+    font-size: 1.2em;
+    font-family: 'Roboto Mono', monospace;
+    align-items: center;
+}
+
+h1, h2{
+    text-align: center;
+}
+
+.login-form{
+    display: block;
+     text-align: center;
+     font-size: 2em; 
+     font-family: 'Roboto Mono', monospace;
+    
+}
+
+.login-input, .password-input {
+    width: 300px;
+    height: 40px;
+}
+
+.login-submit-button{
+    width: 150px;
+    height: 40px;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+.search-box {
+    padding: 10px;
+    border-radius: 6px;
+    width: 250px;
+    margin-right: 10px;
+}
+.search-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.BaseNav{
+    background-color: #4CAF50;
+    color:black;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    
+}
+
+a {
+    text-decoration: none; /* Removes underline */
+    color: inherit; /* Inherits color from parent */
 }
