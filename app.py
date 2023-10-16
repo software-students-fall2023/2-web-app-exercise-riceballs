@@ -56,14 +56,14 @@ def ViewMyFood():
 @app.route('/', methods = ['GET', 'POST'])
 def LoginPage():
     if (request.method == 'GET'):
-        return render_template('base.html', headerTitle = "Login", register = True)
+        return render_template('Login.html', headerTitle = "Login", register = True)
     else: 
         name = request.form['fname']
         pwd = request.form['fpwd']
         if (name == pwd):  # perform validate login info via db !! PLACEHOLDER
             return redirect(url_for('RootPage'))
         else:
-            return render_template('base.html', headerTitle = "Login", register = True)
+            return render_template('Login.html', headerTitle = "Login", register = True)
     
 
 
@@ -72,7 +72,7 @@ def LoginPage():
 @app.route('/register', methods = ['GET', 'POST'])
 def RegisterPage():
     if (request.method == 'GET'):
-        return render_template('base.html', headerTitle = "Register", register = False)
+        return render_template('Login.html', headerTitle = "Register", register = False)
     else: 
         name = request.form['fname']
         pwd = request.form['fpwd']
@@ -82,7 +82,7 @@ def RegisterPage():
         if(True):
             return redirect(url_for('RootPage'))
         else:
-            return render_template('base.html', headerTitle = "Register", register = False)
+            return render_template('Login.html', headerTitle = "Register", register = False)
 
 
 
