@@ -3,7 +3,7 @@
 from flask import Flask, render_template, request, redirect, url_for, make_response, session
 from dotenv import load_dotenv
 import os
-
+from pymongo import MongoClient
 import pymongo
 import datetime
 from bson.objectid import ObjectId
@@ -20,6 +20,18 @@ app.secret_key = 'pass'
 # if you do not yet have a file named .env, make one based on the template in env.example
 load_dotenv()  # take environment variables from .env.
 
+mongodb_uri = os.getenv("MONGO_URI")
+database_name = os.getenv("MONGO_DBNAME")
+
+try:
+    client = MongoClient(mongodb_uri)
+    db = client[database_name]
+    print("Connected to MongoDB")
+except Exception as e:
+    print(f"Error connecting to MongoDB: {e}")
+
+client = MongoClient(mongodb_uri)
+db = client[database_name]
 # make a connection to db
 # connection = pymongo.MongoClient("class-mongodb.cims.nyu.edu", 8080, )
 
@@ -31,6 +43,30 @@ def RootPage():
 @app.route('/AddFoodTruck')
 def AddFoodPage():
     return render_template('AddFoodTruck.html')
+
+@app.route('/AddFoodTruck', methods=['POST'])
+def addFoodTruck():
+    if request.method == 'POST':
+        FoodCartName = request.form['FoodCartName']
+        Cuisine = request.form['Cuisine']
+        Hours = request.form['Hours']
+        Address = request.form['Address']
+        Price = request.form['Price']
+        Vegan = request.form['Vegan']
+
+        FoodTruckData = {
+            "FoodCartName": FoodCartName,
+            "Cuisine": Cuisine,
+            "Hours": Hours,
+            "Address": Address,
+            "Price": Price,
+            "vegan_options": Vegan
+        }
+
+        food_trucks_collection = db['food_trucks_information']
+        food_trucks_collection.insert_one(FoodTruckData)
+        return redirect(url_for('RootPage'))  
+    
 
 @app.route('/EditTruck')
 def EditPage():
@@ -44,16 +80,18 @@ def individualFood():
 def SearchCuisine():
     return render_template('SearchCuisine.html')
 
-@app.route('/ViewAll')
-def ViewAll():
-    return render_template('ViewAll.html')
+@app.route('/ViewAllFood')
+def ViewAllFood():
+    food_trucks_collection = db['food_trucks_information']  # Assuming 'food_trucks' is your collection name
+    all_food_trucks = food_trucks_collection.find()
+    return render_template('ViewAllFood.html', all_food_trucks=all_food_trucks)
 
 
 @app.route('/ViewMyFood')
 def ViewMyFood():
     return render_template('ViewMyFood.html')
 
-# # Login
+ # Login
 # @app.route('/', methods = ['GET', 'POST'])
 # def LoginPage():
 #     if (request.method == 'GET'):
@@ -71,9 +109,9 @@ def ViewMyFood():
 
 @app.route('/', methods=['GET', 'POST'])
 def LoginPage():
-    error = None
-
-    if request.method == 'POST':
+    if (request.method == 'GET'):
+        return render_template('Login.html', headerTitle = "Login", action = '/', register = True)
+    else:
         username = request.form['fname']
         password = request.form['fpwd']
 
@@ -84,19 +122,13 @@ def LoginPage():
             return redirect(url_for('RootPage'))
         else:
             error = "Invalid username or password."
-
-    return render_template('Login.html', headerTitle="Login", register=True, error=error)
-
-
-
-
-
+            return render_template('Login.html', headerTitle="Login", action = '/',  register=True, error=error)
+        
 
 @app.route('/register', methods=['GET', 'POST'])
 def RegisterPage():
-    
     if request.method == 'GET':
-        return render_template('Login.html', headerTitle="Register", register=False)
+        return render_template('Login.html', headerTitle="Register", action = '/register', register=False)
     else:
         name = request.form['fname']
         pwd = request.form['fpwd']
@@ -108,7 +140,7 @@ def RegisterPage():
         else:
             # Registration failed, print an error message
             print(f"Failed to register user '{name}'.")
-            return render_template('Login.html', headerTitle="Register", register=False)
+            return render_template('Login.html', headerTitle="Register", action = '/register', register=False)
 
 
 
