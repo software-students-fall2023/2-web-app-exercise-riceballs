@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from flask import Flask, render_template, request, redirect, url_for, make_response
+from flask import Flask, render_template, request, redirect, url_for, make_response, session
 from dotenv import load_dotenv
 import os
 
@@ -9,6 +9,7 @@ import datetime
 from bson.objectid import ObjectId
 import sys
 
+from database import register_user, authenticate_user
 
 # instantiate the app
 app = Flask('FoodTruck')
@@ -52,38 +53,62 @@ def ViewAll():
 def ViewMyFood():
     return render_template('ViewMyFood.html')
 
-# Login
-@app.route('/', methods = ['GET', 'POST'])
-def LoginPage():
-    if (request.method == 'GET'):
-        return render_template('Login.html', headerTitle = "Login", register = True)
-    else: 
-        name = request.form['fname']
-        pwd = request.form['fpwd']
-        if (name == pwd):  # perform validate login info via db !! PLACEHOLDER
-            return redirect(url_for('RootPage'))
-        else:
-            return render_template('Login.html', headerTitle = "Login", register = True)
+# # Login
+# @app.route('/', methods = ['GET', 'POST'])
+# def LoginPage():
+#     if (request.method == 'GET'):
+#         return render_template('Login.html', headerTitle = "Login", register = True)
+#     else: 
+#         name = request.form['fname']
+#         pwd = request.form['fpwd']
+#         if (name == pwd):  # perform validate login info via db !! PLACEHOLDER
+#             return redirect(url_for('RootPage'))
+#         else:
+#             return render_template('Login.html', headerTitle = "Login", register = True)
     
 
 
 
-# Register
-@app.route('/register', methods = ['GET', 'POST'])
-def RegisterPage():
-    if (request.method == 'GET'):
-        return render_template('Login.html', headerTitle = "Register", register = False)
-    else: 
-        name = request.form['fname']
-        pwd = request.form['fpwd']
-        # add register info to db
-        
-        # if success -> LoginPage
-        if(True):
+@app.route('/', methods=['GET', 'POST'])
+def LoginPage():
+    error = None
+
+    if request.method == 'POST':
+        username = request.form['fname']
+        password = request.form['fpwd']
+
+        if authenticate_user(username, password):
+            # Authentication successful
+            session['logged_in'] = True
+            session['username'] = username
             return redirect(url_for('RootPage'))
         else:
-            return render_template('Login.html', headerTitle = "Register", register = False)
+            error = "Invalid username or password."
 
+    return render_template('Login.html', headerTitle="Login", register=True, error=error)
+
+
+
+
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def RegisterPage():
+    
+    if request.method == 'GET':
+        return render_template('Login.html', headerTitle="Register", register=False)
+    else:
+        name = request.form['fname']
+        pwd = request.form['fpwd']
+        
+        if register_user(name, pwd):
+            # Registration successful, print a message and redirect
+            print(f"User '{name}' registered successfully.")
+            return redirect(url_for('RootPage'))
+        else:
+            # Registration failed, print an error message
+            print(f"Failed to register user '{name}'.")
+            return render_template('Login.html', headerTitle="Register", register=False)
 
 
 
