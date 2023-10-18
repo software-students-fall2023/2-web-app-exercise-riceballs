@@ -7,6 +7,7 @@ name = "pypi"
 flask = "*"
 pymongo = "*"
 python-dotenv = "*"
+passlib = "*"
 
 [dev-packages]
 

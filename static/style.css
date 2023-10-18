@@ -113,3 +113,16 @@ a {
     text-decoration: none; /* Removes underline */
     color: inherit; /* Inherits color from parent */
 }
+
+.food-trucks-container{
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 10px;
+}
+
+.food-truck-divs{
+    border: 1px solid black;
+    border-radius: 13px;
+    padding: 10px;
+    margin-bottom: 10px;
+}

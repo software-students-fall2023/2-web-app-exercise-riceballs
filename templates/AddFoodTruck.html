@@ -7,40 +7,14 @@
     <title>Add Food Truck</title>
 </head>
 <body>
-    <form action="base.html">
-        <input type="submit" style="float:right;" value="Logout" />
-    </form>
-    <header>
-        <div class="header">
-            <a href="rootpage.html"><h1 style="text-align:center">Welcome to FoodTruck</h1></a>
-        </div>
-    </header>
-
-    <main>
-        <div class="container">
-            <form action="SearchCuisine.html" style="display:inline-block;">
-                <input type="submit" value="Search for Cuisine" class="BaseNav"/>
-            </form>
-            
-            <form action="ViewAllFood.html" style="display:inline-block;">
-                <input type="submit" value="View all FoodTruck reviews" class="BaseNav"/>
-            </form>
-           
-            <form action="ViewMyFood.html" style="display:inline-block;">
-                <input type="submit" value="Your FoodTruck Reviews" class="BaseNav"/>
-            </form>
-            <form action="AddFoodTruck.html" style="display:inline-block;">
-                <input type="submit" value="Add New FoodTruck Review" class="BaseNav"/>
-            </form>
-        </div>
-
+    {% extends 'base.html' %} {% block Base %}
         <h2> Add Food Truck</h2>
         <div class="add-food-form">
         <form action="/AddFoodTruck" method="POST" class="" id="AddForm">
             <div class="food-divs">
-                <label for="user">Food Cart Name:</label>
+                <label for="FoodCartName">Food Cart Name:</label>
                 <div>
-                    <input type="text" name="user" class="add-input">
+                    <input type="text" name="FoodCartName" class="add-input">
                 </div>
             </div>
 
@@ -68,7 +42,7 @@
             <div class="food-divs">
                 <label for="Price">Price:</label>
                 <div>
-                    <select name="price" id="price">
+                    <select name="Price" id="price">
                     <option value=""></option>
                     <option value="LowCost">$</option>
                     <option value="MediumCost">$$</option>
@@ -94,9 +68,9 @@
 
             </form>
         </div>
+    {% endblock %}
 
-
-    </main>
+    
 </body>
 </html>
 

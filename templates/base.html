@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/">
+        <input type="submit" style="float:right;" value="Logout"class="BaseNav" />
+    </form>
+    <header>
+        <div class="header">
+            <a href="/FoodTruck"><h1 style="text-align:center">Welcome to FoodTruck</h1></a>
+        </div>
+    </header>
+
+    
+        <div class="container">
+            <form action="/SearchCuisine" style="display:inline-block;">
+                <input type="submit" value="Search for Cuisine" class="BaseNav"/>
+            </form>
+            
+            <form action="/ViewAllFood" style="display:inline-block;">
+                <input type="submit" value="View all FoodTruck reviews" class="BaseNav"/>
+            </form>
+           
+            <form action="/ViewMyFood" style="display:inline-block;">
+                <input type="submit" value="Your FoodTruck Reviews" class="BaseNav"/>
+            </form>
+            <form action="/AddFoodTruck" style="display:inline-block;">
+                <input type="submit" value="Add New FoodTruck Review" class="BaseNav"/>
+            </form>
+        </div>
+
+        <main>{% block Base %} {% endblock %}</main>
+    
+</body>
+</html>

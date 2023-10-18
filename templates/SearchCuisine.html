@@ -7,38 +7,13 @@
     <title>Search By Cuisine type</title>
 </head>
 <body>
-    <form action="base.html">
-        <input type="submit" style="float:right;" value="Logout" />
-    </form>
-    <header>
-        <div class="header">
-            <a href="rootpage.html"><h1 style="text-align:center">Welcome to FoodTruck</h1></a>
-        </div>
-    </header>
-
-    <main>
-        <div class="container">
-            <form action="SearchCuisine.html" style="display:inline-block;">
-                <input type="submit" value="Search for Cuisine" class="BaseNav"/>
-            </form>
-            
-            <form action="ViewAllFood.html" style="display:inline-block;">
-                <input type="submit" value="View all FoodTruck reviews" class="BaseNav"/>
-            </form>
-           
-            <form action="ViewMyFood.html" style="display:inline-block;">
-                <input type="submit" value="Your FoodTruck Reviews" class="BaseNav"/>
-            </form>
-            <form action="AddFoodTruck.html" style="display:inline-block;">
-                <input type="submit" value="Add New FoodTruck Review" class="BaseNav"/>
-            </form>
-        </div>
+    {% extends 'base.html' %} {% block Base %}
         <h2>Search by Cuisine</h2>
         <div class="search-container">
             <input type="text" class="search-box" placeholder="Search for Cuisine">
             <button class="search-button">Search</button>
         </div>
-    </main>
+    {% endblock %}
     
     
 </body>
