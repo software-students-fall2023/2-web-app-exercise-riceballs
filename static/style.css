@@ -126,3 +126,7 @@ a {
     padding: 10px;
     margin-bottom: 10px;
 }
+
+.Edit_Delete_Buttons > button{
+    display: inline-block;
+}

@@ -53,8 +53,10 @@ def addFoodTruck():
         Address = request.form['Address']
         Price = request.form['Price']
         Vegan = request.form['Vegan']
+        User = session['username']
 
         FoodTruckData = {
+            "User": User,
             "FoodCartName": FoodCartName,
             "Cuisine": Cuisine,
             "Hours": Hours,
@@ -67,10 +69,6 @@ def addFoodTruck():
         food_trucks_collection.insert_one(FoodTruckData)
         return redirect(url_for('RootPage'))  
     
-
-@app.route('/EditTruck')
-def EditPage():
-    return render_template('EditTruck.html')
 
 @app.route('/individualFood')
 def individualFood():
@@ -86,27 +84,32 @@ def ViewAllFood():
     all_food_trucks = food_trucks_collection.find()
     return render_template('ViewAllFood.html', all_food_trucks=all_food_trucks)
 
-
 @app.route('/ViewMyFood')
 def ViewMyFood():
-    return render_template('ViewMyFood.html')
+    food_trucks_collection = db['food_trucks_information']
+    AllMyFoodTrucks = food_trucks_collection.find({"User": session["username"]})
+    return render_template('ViewMyFood.html', AllMyFoodTrucks=AllMyFoodTrucks)
 
- # Login
-# @app.route('/', methods = ['GET', 'POST'])
-# def LoginPage():
-#     if (request.method == 'GET'):
-#         return render_template('Login.html', headerTitle = "Login", register = True)
-#     else: 
-#         name = request.form['fname']
-#         pwd = request.form['fpwd']
-#         if (name == pwd):  # perform validate login info via db !! PLACEHOLDER
-#             return redirect(url_for('RootPage'))
-#         else:
-#             return render_template('Login.html', headerTitle = "Login", register = True)
+# Deleting object also see professors example webapp 
+
+@app.route('/DeleteTruck/<FoodTruckId>', methods=['POST'])
+def DeleteTruck(FoodTruckId):
+    return
+
+# render the actual edit page
+# should search by MongoDb object ID see professors example app. 
+
+@app.route('/EditTruck/<FoodTruckId>', methods=['GET'])
+def EditTruck(FoodTruckId):
+    return render_template('EditTruck.html')
     
 
+# handle the edit page submissions 
 
-
+@app.route('/EditTruck/<FoodTruckId>', methods=['POST'])
+def EditTruckSubmission(FoodTruckId):
+    return
+ 
 @app.route('/', methods=['GET', 'POST'])
 def LoginPage():
     if (request.method == 'GET'):
