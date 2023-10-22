@@ -4,11 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/style.css">
-    <title>Document</title>
+    <title>Edit FoodTruck</title>
 </head>
 <body>
     {% extends 'base.html' %} {% block Base %}
     <h2>Edit Food Truck</h2>
+    <div class="add-food-form">
+        {% for truck in TruckPage %}
+        <form action="{{ url_for('EditTruckSubmission', FoodTruckId = truck['_id']) }}" method="POST">
+            <div class="food-divs">
+                <label for="FoodCartName">Food Cart Name:</label>
+                <div>
+                    <input type="text" name="FoodCartName" class="add-input" value="{{ truck.FoodCartName }}">
+                </div>
+            </div>
+
+            <div class="food-divs">
+                <label for="Cuisine">Cuisine:</label>
+                <div>
+                    <input type="text" name="Cuisine" class="add-input" value="{{ truck.Cuisine }}">
+                </div>
+            </div>
+
+            <div class="food-divs">
+                <label for="Hours">Hours:</label>
+                <div>
+                    <input type="text" name="Hours" class="add-input" value="{{ truck.Hours }}">
+                </div>
+            </div>
+
+            <div class="food-divs">
+                <label for="Address">Address:</label>
+                <div>
+                    <input type="text" name="Address" class="add-input" value="{{ truck.Address }}">
+                </div>
+            </div>
+
+            <div class="food-divs">
+                <label for="Price">Price:</label>
+                <div>
+                    <select name="Price" id="price">
+                    <option value=""></option>
+                    <option value="LowCost">$</option>
+                    <option value="MediumCost">$$</option>
+                    <option value="HighCost">$$$</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="food-divs">
+                <label for="Vegan">is there vegan/vegetarian options:</label>
+                <div>
+                    <select name="Vegan" id="price">
+                    <option value=""></option>
+                    <option value="YesVegan">Yes</option>
+                    <option value="NoVegan">No</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="food-divs">
+                <button id="SubmitConfess" type="submit">Edit Food Truck</button>
+            </div>
+        </form>
+        {% endfor %}
+    </div>
     {% endblock %}
     
 </body>

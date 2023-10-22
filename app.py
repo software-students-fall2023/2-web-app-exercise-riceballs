@@ -94,21 +94,46 @@ def ViewMyFood():
 
 @app.route('/DeleteTruck/<FoodTruckId>', methods=['POST'])
 def DeleteTruck(FoodTruckId):
-    return
+    food_trucks_collection = db['food_trucks_information']
+    food_trucks_collection.delete_one({"_id": ObjectId(FoodTruckId)})
+    return redirect(url_for('ViewMyFood'))
 
 # render the actual edit page
 # should search by MongoDb object ID see professors example app. 
 
 @app.route('/EditTruck/<FoodTruckId>', methods=['GET'])
 def EditTruck(FoodTruckId):
-    return render_template('EditTruck.html')
+    food_trucks_collection = db['food_trucks_information']
+    TruckPage = food_trucks_collection.find({"_id": ObjectId(FoodTruckId)})
+    return render_template('EditTruck.html', TruckPage=TruckPage)
     
 
 # handle the edit page submissions 
 
 @app.route('/EditTruck/<FoodTruckId>', methods=['POST'])
 def EditTruckSubmission(FoodTruckId):
-    return
+    if request.method == 'POST':
+        FoodCartName = request.form['FoodCartName']
+        Cuisine = request.form['Cuisine']
+        Hours = request.form['Hours']
+        Address = request.form['Address']
+        Price = request.form['Price']
+        Vegan = request.form['Vegan']
+        User = session['username']
+
+        FoodTruckData = {
+            "User": User,
+            "FoodCartName": FoodCartName,
+            "Cuisine": Cuisine,
+            "Hours": Hours,
+            "Address": Address,
+            "Price": Price,
+            "vegan_options": Vegan
+        }
+
+        existingFoodTruck = db['food_trucks_information']
+        existingFoodTruck.update_one({"_id": ObjectId(FoodTruckId) }, { "$set": FoodTruckData })
+        return redirect(url_for('ViewMyFood'))
  
 @app.route('/', methods=['GET', 'POST'])
 def LoginPage():
