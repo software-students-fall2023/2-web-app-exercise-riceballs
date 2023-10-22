@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/style.css">
     <title>Add Food Truck</title>
+    <style>
+        /* Media query for screens with a maximum width of 768px (typical for mobile devices) */
+        @media screen and (max-width: 768px) {
+            .food-divs {
+                margin: 10px 0;
+            }
+            .add-input, #price {
+                width: 100%;
+            }
+            #SubmitConfess {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
     {% extends 'base.html' %} {% block Base %}
@@ -52,7 +66,7 @@
             </div>
 
             <div class="food-divs">
-                <label for="Vegan">is there vegan/vegetarian options:</label>
+                <label for="Vegan">Is there vegan/vegetarian options:</label>
                 <div>
                     <select name="Vegan" id="price" required>
                     <option value=""></option>
@@ -65,14 +79,8 @@
             <div class="food-divs">
                 <button id="SubmitConfess" type="submit">Add Food Truck</button>
             </div>
-
-            </form>
+        </form>
         </div>
     {% endblock %}
-
-    
 </body>
 </html>
-
-
-
