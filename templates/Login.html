@@ -2,8 +2,43 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>FoodTruck RootPage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FoodTruck</title>
     <link rel="stylesheet" href="/static/style.css">
+    <style>
+        body {
+            font-size: 16px; 
+        }
+
+        .login-form {
+            padding: 10px;
+        }
+        .login-input, .password-input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .login-submit-button {
+            width: 100%;
+            background-color: #008CBA;
+            color: white;
+            padding: 10px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        @media screen and (max-width: 768px) {
+            .login-input, .password-input {
+                width: 100%;
+            }
+
+            .login-submit-button {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -22,10 +57,9 @@
                     <input type="submit" value = {{headerTitle}} class="login-submit-button"/>
                     <input type="hidden" name="action" value="{% if register %}register{% else %}login{% endif %}">
                 </form>
-                {% if register == True%} <!-- Only show if on LoginPage-->
-                    <a href = "/register">doesn't have an accout? register here</a>
-                {% endif%}
-                
+                {% if register == True %}
+                    <a href="/register">Don't have an account? Register here.</a>
+                {% endif %}
             </div>
         </nav>
     </header>
