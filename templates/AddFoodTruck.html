@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Add Food Truck</title>
+</head>
+<body>
+    {% extends 'base.html' %} {% block Base %}
+        <h2> Add Food Truck</h2>
+        <div class="add-food-form">
+        <form action="/AddFoodTruck" method="POST" class="" id="AddForm">
+            <div class="food-divs">
+                <label for="FoodCartName">Food Cart Name:</label>
+                <div>
+                    <input type="text" name="FoodCartName" class="add-input">
+                </div>
+            </div>
+
+            <div class="food-divs">
+                <label for="Cuisine">Cuisine:</label>
+                <div>
+                    <input type="text" name="Cuisine" class="add-input">
+                </div>
+            </div>
+
+            <div class="food-divs">
+                <label for="Hours">Hours:</label>
+                <div>
+                    <input type="text" name="Hours" class="add-input">
+                </div>
+            </div>
+
+            <div class="food-divs">
+                <label for="Address">Address:</label>
+                <div>
+                    <input type="text" name="Address" class="add-input">
+                </div>
+            </div>
+
+            <div class="food-divs">
+                <label for="Price">Price:</label>
+                <div>
+                    <select name="Price" id="price">
+                    <option value=""></option>
+                    <option value="$">$</option>
+                    <option value="$$">$$</option>
+                    <option value="$$$">$$$</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="food-divs">
+                <label for="Vegan">is there vegan/vegetarian options:</label>
+                <div>
+                    <select name="Vegan" id="price">
+                    <option value=""></option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="food-divs">
+                <button id="SubmitConfess" type="submit">Add Food Truck</button>
+            </div>
+
+            </form>
+        </div>
+    {% endblock %}
+
+    
+</body>
+</html>
+
+
+
