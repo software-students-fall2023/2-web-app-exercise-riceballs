@@ -4,10 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .BaseNav.active {
+            background-color: #007bff; /* Set your preferred highlight color here */
+            color: #fff; /* Set text color for the highlighted link */
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const navLinks = document.querySelectorAll(".BaseNav");
+            navLinks.forEach(function(link) {
+                link.addEventListener("click", function() {
+                    // Remove the "active" class from all links
+                    navLinks.forEach(function(navLink) {
+                        navLink.classList.remove("active");
+                    });
+                    // Add the "active" class to the clicked link
+                    this.classList.add("active");
+                });
+            });
+        });
+    </script>
 </head>
 <body>
     <form action="/">
-        <input type="submit" style="float:right;" value="Logout"class="BaseNav" />
+        <input type="submit" style="float:right;" value="Logout" class="BaseNav" />
     </form>
     <header>
         <div class="header">
@@ -17,26 +38,24 @@
 
     <h3>Logged in as: {{User}}</h3>
 
-    
-        <div class="container">
-            <!--<a href="/SearchCuisine"><h1 style="text-align:center">Search for Cuisine</h1></a>-->
-           <form action="/SearchCuisine" style="display:inline-block;">
-                <input type="submit" value="Search for Cuisine" class="BaseNav"/>
-            </form>
-            
-            <form action="/ViewAllFood" style="display:inline-block;">
-                <input type="submit" value="View all FoodTruck reviews" class="BaseNav"/>
-            </form>
-           
-            <form action="/ViewMyFood" style="display:inline-block;">
-                <input type="submit" value="Your FoodTruck Reviews" class="BaseNav"/>
-            </form>
-            <form action="/AddFoodTruck" style="display:inline-block;">
-                <input type="submit" value="Add New FoodTruck Review" class="BaseNav"/>
-            </form>
-        </div>
+    <div class="container">
+        <form action="/SearchCuisine" style="display:inline-block;">
+            <input type="submit" value="Search for Cuisine" class="BaseNav"/>
+        </form>
 
-        <main>{% block Base %} {% endblock %}</main>
-    
+        <form action="/ViewAllFood" style="display:inline-block;">
+            <input type="submit" value="View all FoodTruck reviews" class="BaseNav"/>
+        </form>
+
+        <form action="/ViewMyFood" style="display:inline-block;">
+            <input type="submit" value="Your FoodTruck Reviews" class="BaseNav"/>
+        </form>
+        
+        <form action="/AddFoodTruck" style="display:inline-block;">
+            <input type="submit" value="Add New FoodTruck Review" class="BaseNav"/>
+        </form>
+    </div>
+
+    <main>{% block Base %} {% endblock %}</main>
 </body>
 </html>
