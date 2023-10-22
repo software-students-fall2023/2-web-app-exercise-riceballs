@@ -21,6 +21,10 @@ db = client[database_name]
 
 def register_user(username, password):
     try:
+        # check if user exist 
+        ExistingUser = db.users.find_one({"username": username})
+        if (ExistingUser):
+            return False
         print(f"hi")
         # Insert user data into the 'users' collection
         hashed_password = sha256_crypt.encrypt(password)
