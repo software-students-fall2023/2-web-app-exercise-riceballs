@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>FoodTruck RootPage</title>
+    <title>FoodTruck</title>
     <link rel="stylesheet" href="/static/style.css">
     <style>
-        /* Add mobile-specific styles here */
         body {
-            font-size: 16px; /* Adjust font size for readability */
+            font-size: 16px; 
         }
 
         .login-form {
             padding: 10px;
         }
-
         .login-input, .password-input {
             width: 100%;
             padding: 10px;
@@ -22,7 +20,6 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-
         .login-submit-button {
             width: 100%;
             background-color: #008CBA;
@@ -32,8 +29,6 @@
             border-radius: 5px;
             cursor: pointer;
         }
-
-        /* Styles for small screens (up to 768px) */
         @media screen and (max-width: 768px) {
             .login-input, .password-input {
                 width: 100%;
@@ -55,7 +50,7 @@
                     <label for="fname">Username:</label><br>
                     <input type="text" id="fname" name="fname" class="login-input"><br>
                     <label for="fpwd">Password:</label><br>
-                    <input type="password" name="fpwd" class="password-input"><br> <!-- Change input type to password -->
+                    <input type="password" name="fpwd" class="password-input"><br> 
                     <input type="submit" value="{{headerTitle}}" class="login-submit-button">
                     <input type="hidden" name="action" value="{% if register %}register{% else %}login{% endif %}">
                 </form>
