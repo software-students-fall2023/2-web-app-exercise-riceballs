@@ -2,8 +2,48 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>FoodTruck RootPage</title>
     <link rel="stylesheet" href="/static/style.css">
+    <style>
+        /* Add mobile-specific styles here */
+        body {
+            font-size: 16px; /* Adjust font size for readability */
+        }
+
+        .login-form {
+            padding: 10px;
+        }
+
+        .login-input, .password-input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .login-submit-button {
+            width: 100%;
+            background-color: #008CBA;
+            color: white;
+            padding: 10px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Styles for small screens (up to 768px) */
+        @media screen and (max-width: 768px) {
+            .login-input, .password-input {
+                width: 100%;
+            }
+
+            .login-submit-button {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -12,17 +52,16 @@
         <nav>
             <div class="login-form">
                 <form method="POST" action="{{action}}">
-                    <label for="fname"> Username: </label><br>
-                    <input type="text" id = "fname" name="fname" class="login-input"/><br>
-                    <label for="fpwd"> Password: </label><br>
-                    <input type="text" name="fpwd" class="password-input"/><br>
-                    <input type="submit" value = {{headerTitle}} class="login-submit-button"/>
+                    <label for="fname">Username:</label><br>
+                    <input type="text" id="fname" name="fname" class="login-input"><br>
+                    <label for="fpwd">Password:</label><br>
+                    <input type="password" name="fpwd" class="password-input"><br> <!-- Change input type to password -->
+                    <input type="submit" value="{{headerTitle}}" class="login-submit-button">
                     <input type="hidden" name="action" value="{% if register %}register{% else %}login{% endif %}">
                 </form>
-                {% if register == True%} <!-- Only show if on LoginPage-->
-                    <a href = "/register">doesn't have an accout? register here</a>
-                {% endif%}
-                
+                {% if register == True %}
+                    <a href="/register">Don't have an account? Register here.</a>
+                {% endif %}
             </div>
         </nav>
     </header>
