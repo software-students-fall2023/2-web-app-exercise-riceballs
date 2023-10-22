@@ -53,7 +53,7 @@ form {
     align-items: center;
 }
 
-h1, h2{
+h1, h2, h3{
     text-align: center;
 }
 
@@ -129,24 +129,3 @@ a {
     display: inline-block;
 }
 
-
-@media only screen and (max-width: 390px) {
-    /* Add your mobile-specific styles here */
-    .food-truck-divs {
-        display: block;
-        align-content: center;
-        border: 1px solid #ddd;
-        padding: 10px;
-        margin: 10px 0;
-    }
-
-    .food-truck-divs form {
-        display: block;
-        margin-top: 10px;
-    }
-
-    .food-truck-divs form button {
-        display: block;
-        margin: 10px auto;
-    }
-}
