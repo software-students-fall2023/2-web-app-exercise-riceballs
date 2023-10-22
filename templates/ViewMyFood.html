@@ -9,6 +9,30 @@
 <body>
     {% extends 'base.html' %} {% block Base %}
     <h2>My Food Carts</h2>
+    <div class="food-trucks-container">
+        {% for truck in AllMyFoodTrucks %}
+        {% if truck.User == session['username'] %}
+        <div class="food-truck-divs">
+            <h3>{{ truck.FoodCartName }}</h3>
+            <p><strong>Cuisine:</strong> {{ truck.Cuisine }}</p>
+            <p><strong>Hours:</strong> {{ truck.Hours }}</p>
+            <p><strong>Address:</strong> {{ truck.Address }}</p>
+            <p><strong>Price:</strong> {{ truck.Price }}</p>
+            <p><strong>Vegan Options:</strong> {{ truck.vegan_options }}</p>
+
+            <div class="Edit_Delete_Buttons">
+                <form action="{{ url_for('DeleteTruck', FoodTruckId = truck['_id']) }}" method="POST" style="display: inline;">
+                    <button type="submit">Delete</button>
+                </form>
+                <form action="{{ url_for('EditTruck', FoodTruckId = truck['_id']) }}" method="GET" style="display: inline;">
+                    <button type="submit">Edit</button>
+                </form> 
+            </div>
+            
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
     {% endblock %}
 </body>
 </html>
