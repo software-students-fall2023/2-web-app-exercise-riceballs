@@ -76,7 +76,22 @@ def individualFood():
 
 @app.route('/SearchCuisine')
 def SearchCuisine():
-    return render_template('SearchCuisine.html')
+    filteredFoodtruck = []
+    food_trucks_collection = db['food_trucks_information']
+    print(request.args.get("cuisine"))
+    if request.args.get('cuisine') != None:
+        cuisineQ = request.args['cuisine']
+        print(cuisineQ)
+        filteredFoodtruck = food_trucks_collection.find({
+            "Cuisine":cuisineQ
+        })
+        return render_template('SearchCuisine.html', filteredFoodTruck = filteredFoodtruck)
+    else:
+        filteredFoodtruck = food_trucks_collection.find()
+        return render_template('SearchCuisine.html', filteredFoodTruck = [])
+            
+    
+
 
 @app.route('/ViewAllFood')
 def ViewAllFood():

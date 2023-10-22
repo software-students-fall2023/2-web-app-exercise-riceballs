@@ -10,10 +10,57 @@
     {% extends 'base.html' %} {% block Base %}
         <h2>Search by Cuisine</h2>
         <div class="search-container">
-            <input type="text" class="search-box" placeholder="Search for Cuisine">
-            <button class="search-button">Search</button>
+            <form method = "get"> 
+                <input type="text" class="search-box" name="cuisine" placeholder="Search for Cuisine" required>
+                <input type="submit" value="Search">
+                <!--<button class="search-button">Search</button>-->
+            </form>
         </div>
+        
+    <b><h1>FoodTruck Result:</h1></b>
+    <div>
+        <table>
+            <tr>
+                <th>
+                    <b>Name </b>
+                </th>
+                <th>
+                    <b>Cuisine</b>
+                </th>
+                <th>
+                    <b>Hours</b>
+                </th>
+                <th>
+                    <b>Price </b>
+                </th>
+                <th>
+                    <b>Address</b>
+                </th>
+            </tr>
+            {% for foodtruck in filteredFoodTruck%}
+            <tr>  
+                <td>
+                    {{foodtruck.FoodCartName}}
+                </td>
+                <td>
+                    {{foodtruck.Cuisine}}
+                </td>
+                <td>
+                    {{foodtruck.Hours}}
+                </td>
+                <td>
+                    {{foodtruck.Price}}
+                </td>
+                <td>
+                    {{foodtruck.Address}}
+                </td>
+            </tr>
+            {%endfor%}
+        </table>
+    </div>
     {% endblock %}
+
+
     
     
 </body>
