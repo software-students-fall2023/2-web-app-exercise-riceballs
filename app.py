@@ -32,20 +32,24 @@ except Exception as e:
 
 client = MongoClient(mongodb_uri)
 db = client[database_name]
+
 # make a connection to db
 # connection = pymongo.MongoClient("class-mongodb.cims.nyu.edu", 8080, )
 
 # root page
 @app.route('/FoodTruck')
 def RootPage():
-    return render_template('rootpage.html')
+    User = session['username']
+    return render_template('rootpage.html', User=User)
 
 @app.route('/AddFoodTruck')
 def AddFoodPage():
-    return render_template('AddFoodTruck.html')
+    User = session['username']
+    return render_template('AddFoodTruck.html',  User=User)
 
 @app.route('/AddFoodTruck', methods=['POST'])
 def addFoodTruck():
+    
     if request.method == 'POST':
         FoodCartName = request.form['FoodCartName']
         Cuisine = request.form['Cuisine']
@@ -70,12 +74,10 @@ def addFoodTruck():
         return redirect(url_for('RootPage'))  
     
 
-@app.route('/individualFood')
-def individualFood():
-    return render_template('individualFood.html')
 
 @app.route('/SearchCuisine')
 def SearchCuisine():
+    User = session['username']
     filteredFoodtruck = []
     food_trucks_collection = db['food_trucks_information']
     print(request.args.get("cuisine"))
@@ -85,27 +87,26 @@ def SearchCuisine():
         filteredFoodtruck = food_trucks_collection.find({
             "Cuisine":cuisineQ
         })
-        return render_template('SearchCuisine.html', filteredFoodTruck = filteredFoodtruck)
+        return render_template('SearchCuisine.html', filteredFoodTruck = filteredFoodtruck,  User=User)
     else:
         filteredFoodtruck = food_trucks_collection.find()
-        return render_template('SearchCuisine.html', filteredFoodTruck = [])
+        return render_template('SearchCuisine.html', filteredFoodTruck = [],  User=User)
             
     
-
-
 @app.route('/ViewAllFood')
 def ViewAllFood():
+    User = session['username']
     food_trucks_collection = db['food_trucks_information']  # Assuming 'food_trucks' is your collection name
     all_food_trucks = food_trucks_collection.find()
-    return render_template('ViewAllFood.html', all_food_trucks=all_food_trucks)
+    return render_template('ViewAllFood.html', all_food_trucks=all_food_trucks, User=User)
 
 @app.route('/ViewMyFood')
 def ViewMyFood():
+    User = session['username']
     food_trucks_collection = db['food_trucks_information']
     AllMyFoodTrucks = food_trucks_collection.find({"User": session["username"]})
-    return render_template('ViewMyFood.html', AllMyFoodTrucks=AllMyFoodTrucks)
+    return render_template('ViewMyFood.html', AllMyFoodTrucks=AllMyFoodTrucks, User=User)
 
-# Deleting object also see professors example webapp 
 
 @app.route('/DeleteTruck/<FoodTruckId>', methods=['POST'])
 def DeleteTruck(FoodTruckId):
@@ -113,14 +114,12 @@ def DeleteTruck(FoodTruckId):
     food_trucks_collection.delete_one({"_id": ObjectId(FoodTruckId)})
     return redirect(url_for('ViewMyFood'))
 
-# render the actual edit page
-# should search by MongoDb object ID see professors example app. 
 
 @app.route('/EditTruck/<FoodTruckId>', methods=['GET'])
 def EditTruck(FoodTruckId):
     food_trucks_collection = db['food_trucks_information']
     TruckPage = food_trucks_collection.find({"_id": ObjectId(FoodTruckId)})
-    return render_template('EditTruck.html', TruckPage=TruckPage)
+    return render_template('EditTruck.html', TruckPage=TruckPage, User=User)
     
 
 # handle the edit page submissions 
@@ -164,7 +163,7 @@ def LoginPage():
             session['username'] = username
             return redirect(url_for('RootPage'))
         else:
-            error = "Invalid username or password."
+            error = "Login Falied: Invalid username or password."
             return render_template('Login.html', headerTitle="Login", action = '/',  register=True, error=error)
         
 
@@ -183,7 +182,8 @@ def RegisterPage():
         else:
             # Registration failed, print an error message
             print(f"Failed to register user '{name}'.")
-            return render_template('Login.html', headerTitle="Register", action = '/register', register=False)
+            error =  'Username already exist please create a new one'
+            return render_template('Login.html', headerTitle="Register", action = '/register', register=False, error=error)
 
 
 

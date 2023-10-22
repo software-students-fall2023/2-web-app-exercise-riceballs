@@ -3,7 +3,6 @@ body {
     margin: 0;
     padding: 20px;
     line-height: 1.6;
-    overflow: hidden;
     font-family: 'Roboto Mono', monospace;
 }
 .header {
@@ -14,7 +13,6 @@ body {
     margin: 30px auto;
     text-align: center;
 }
-
 
 .container {
     background-color: #ffffff;
@@ -55,7 +53,7 @@ form {
     align-items: center;
 }
 
-h1, h2{
+h1, h2, h3{
     text-align: center;
 }
 
@@ -130,3 +128,4 @@ a {
 .Edit_Delete_Buttons > button{
     display: inline-block;
 }
+

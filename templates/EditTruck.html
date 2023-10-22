@@ -15,39 +15,39 @@
             <div class="food-divs">
                 <label for="FoodCartName">Food Cart Name:</label>
                 <div>
-                    <input type="text" name="FoodCartName" class="add-input" value="{{ truck.FoodCartName }}">
+                    <input type="text" name="FoodCartName" class="add-input" value="{{ truck.FoodCartName }}" required>
                 </div>
             </div>
 
             <div class="food-divs">
                 <label for="Cuisine">Cuisine:</label>
                 <div>
-                    <input type="text" name="Cuisine" class="add-input" value="{{ truck.Cuisine }}">
+                    <input type="text" name="Cuisine" class="add-input" value="{{ truck.Cuisine }}" required>
                 </div>
             </div>
 
             <div class="food-divs">
                 <label for="Hours">Hours:</label>
                 <div>
-                    <input type="text" name="Hours" class="add-input" value="{{ truck.Hours }}">
+                    <input type="text" name="Hours" class="add-input" value="{{ truck.Hours }}" required>
                 </div>
             </div>
 
             <div class="food-divs">
                 <label for="Address">Address:</label>
                 <div>
-                    <input type="text" name="Address" class="add-input" value="{{ truck.Address }}">
+                    <input type="text" name="Address" class="add-input" value="{{ truck.Address }}" required>
                 </div>
             </div>
 
             <div class="food-divs">
                 <label for="Price">Price:</label>
                 <div>
-                    <select name="Price" id="price">
+                    <select name="Price" id="price" required>
                     <option value=""></option>
-                    <option value="LowCost">$</option>
-                    <option value="MediumCost">$$</option>
-                    <option value="HighCost">$$$</option>
+                    <option value="$">$</option>
+                    <option value="$$">$$</option>
+                    <option value="$$$">$$$</option>
                     </select>
                 </div>
             </div>
@@ -55,10 +55,10 @@
             <div class="food-divs">
                 <label for="Vegan">is there vegan/vegetarian options:</label>
                 <div>
-                    <select name="Vegan" id="price">
+                    <select name="Vegan" id="price" required>
                     <option value=""></option>
-                    <option value="YesVegan">Yes</option>
-                    <option value="NoVegan">No</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
                     </select>
                 </div>
             </div>
