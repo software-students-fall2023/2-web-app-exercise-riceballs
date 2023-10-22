@@ -5,6 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/style.css">
     <title>Document</title>
+    <style>
+        /* Media query for screens with a maximum width of 768px (typical for mobile devices) */
+        @media screen and (max-width: 768px) {
+            .food-trucks-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .food-truck-divs {
+                width: 90%;
+                margin: 10px;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+            .Edit_Delete_Buttons {
+                text-align: center;
+                margin-top: 10px;
+            }
+            .Edit_Delete_Buttons form {
+                display: block;
+                margin: 5px 0;
+            }
+        }
+    </style>
 </head>
 <body>
     {% extends 'base.html' %} {% block Base %}
@@ -21,14 +46,13 @@
             <p><strong>Vegan Options:</strong> {{ truck.vegan_options }}</p>
 
             <div class="Edit_Delete_Buttons">
-                <form action="{{ url_for('DeleteTruck', FoodTruckId = truck['_id']) }}" method="POST" style="display: inline;">
+                <form action="{{ url_for('DeleteTruck', FoodTruckId = truck['_id']) }}" method="POST">
                     <button type="submit">Delete</button>
                 </form>
-                <form action="{{ url_for('EditTruck', FoodTruckId = truck['_id']) }}" method="GET" style="display: inline;">
+                <form action="{{ url_for('EditTruck', FoodTruckId = truck['_id']) }}" method="GET">
                     <button type="submit">Edit</button>
-                </form> 
+                </form>
             </div>
-            
         </div>
         {% endif %}
         {% endfor %}

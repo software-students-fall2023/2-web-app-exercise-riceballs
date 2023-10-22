@@ -5,63 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/style.css">
     <title>Search By Cuisine type</title>
+    <style>
+        /* Media query for screens with a maximum width of 768px (typical for mobile devices) */
+        @media screen and (max-width: 768px) {
+            body {
+                font-size: 16px; /* Adjust the font size for better readability on smaller screens */
+            }
+            .search-box {
+                width: 80%; /* Make the search box wider to fit the screen */
+                margin-right: 10px; /* Add some margin to separate the input and button */
+            }
+            .search-container {
+                text-align: center; /* Center the search form */
+            }
+            table {
+                width: 100%; /* Make the table width 100% for better responsiveness */
+                font-size: 14px; /* Adjust the font size within the table for smaller screens */
+            }
+        }
+    </style>
 </head>
 <body>
     {% extends 'base.html' %} {% block Base %}
         <h2>Search by Cuisine</h2>
         <div class="search-container">
-            <form method = "get"> 
+            <form method="get"> 
                 <input type="text" class="search-box" name="cuisine" placeholder="Search for Cuisine" required>
                 <input type="submit" value="Search">
-                <!--<button class="search-button">Search</button>-->
             </form>
         </div>
         
-    <b><h1>FoodTruck Result:</h1></b>
-    <div>
-        <table>
-            <tr>
-                <th>
-                    <b>Name </b>
-                </th>
-                <th>
-                    <b>Cuisine</b>
-                </th>
-                <th>
-                    <b>Hours</b>
-                </th>
-                <th>
-                    <b>Price </b>
-                </th>
-                <th>
-                    <b>Address</b>
-                </th>
-            </tr>
-            {% for foodtruck in filteredFoodTruck%}
-            <tr>  
-                <td>
-                    {{foodtruck.FoodCartName}}
-                </td>
-                <td>
-                    {{foodtruck.Cuisine}}
-                </td>
-                <td>
-                    {{foodtruck.Hours}}
-                </td>
-                <td>
-                    {{foodtruck.Price}}
-                </td>
-                <td>
-                    {{foodtruck.Address}}
-                </td>
-            </tr>
-            {%endfor%}
-        </table>
-    </div>
+        <b><h1>FoodTruck Result:</h1></b>
+        <div>
+            <table>
+                <tr>
+                    <th><b>Name</b></th>
+                    <th><b>Cuisine</b></th>
+                    <th><b>Hours</b></th>
+                    <th><b>Price</b></th>
+                    <th><b>Address</b></th>
+                </tr>
+                {% for foodtruck in filteredFoodTruck %}
+                <tr>  
+                    <td>{{ foodtruck.FoodCartName }}</td>
+                    <td>{{ foodtruck.Cuisine }}</td>
+                    <td>{{ foodtruck.Hours }}</td>
+                    <td>{{ foodtruck.Price }}</td>
+                    <td>{{ foodtruck.Address }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
     {% endblock %}
-
-
-    
-    
 </body>
 </html>
