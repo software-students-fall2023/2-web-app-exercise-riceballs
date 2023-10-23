@@ -5,6 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/style.css">
     <title>Edit CartCritic</title>
+    <style>
+        @media screen and (max-width: 768px) {
+            .add-food-form {
+                margin: 0 auto;
+                max-width: 300px;
+            }
+            .food-divs {
+                margin: 10px 0;
+            }
+            .add-input, #price {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 16px;
+            }
+            #SubmitConfess {
+                width: 100%;
+                padding: 10px;
+                background-color: #b0bcb1;
+                color: #000000;
+                border: none;
+                border-radius: 5px;
+                font-size: 18px;
+                cursor: pointer;
+            }
+        }
+    </style>
 </head>
 <body>
     {% extends 'base.html' %} {% block Base %}
