@@ -33,8 +33,6 @@ except Exception as e:
 client = MongoClient(mongodb_uri)
 db = client[database_name]
 
-# make a connection to db
-# connection = pymongo.MongoClient("class-mongodb.cims.nyu.edu", 8080, )
 
 # root page
 @app.route('/FoodTruck')
@@ -45,7 +43,7 @@ def RootPage():
 @app.route('/AddFoodTruck')
 def AddFoodPage():
     User = session['username']
-    return render_template('AddFoodTruck.html',  User=User)
+    return render_template('AddFoodTruck.html',  User=User, active_page='AddFoodTruck')
 
 @app.route('/AddFoodTruck', methods=['POST'])
 def addFoodTruck():
@@ -90,7 +88,7 @@ def SearchCuisine():
         return render_template('SearchCuisine.html', filteredFoodTruck = filteredFoodtruck,  User=User)
     else:
         filteredFoodtruck = food_trucks_collection.find()
-        return render_template('SearchCuisine.html', filteredFoodTruck = [],  User=User)
+        return render_template('SearchCuisine.html', filteredFoodTruck = [],  User=User, active_page='SearchCuisine')
             
     
 @app.route('/ViewAllFood')
@@ -98,14 +96,14 @@ def ViewAllFood():
     User = session['username']
     food_trucks_collection = db['food_trucks_information']  # Assuming 'food_trucks' is your collection name
     all_food_trucks = food_trucks_collection.find()
-    return render_template('ViewAllFood.html', all_food_trucks=all_food_trucks, User=User)
+    return render_template('ViewAllFood.html', all_food_trucks=all_food_trucks, User=User, active_page='ViewAllFood')
 
 @app.route('/ViewMyFood')
 def ViewMyFood():
     User = session['username']
     food_trucks_collection = db['food_trucks_information']
     AllMyFoodTrucks = food_trucks_collection.find({"User": session["username"]})
-    return render_template('ViewMyFood.html', AllMyFoodTrucks=AllMyFoodTrucks, User=User)
+    return render_template('ViewMyFood.html', AllMyFoodTrucks=AllMyFoodTrucks, User=User, active_page='ViewMyFood')
 
 
 @app.route('/DeleteTruck/<FoodTruckId>', methods=['POST'])
@@ -117,6 +115,7 @@ def DeleteTruck(FoodTruckId):
 
 @app.route('/EditTruck/<FoodTruckId>', methods=['GET'])
 def EditTruck(FoodTruckId):
+    User = session['username']
     food_trucks_collection = db['food_trucks_information']
     TruckPage = food_trucks_collection.find({"_id": ObjectId(FoodTruckId)})
     return render_template('EditTruck.html', TruckPage=TruckPage, User=User)

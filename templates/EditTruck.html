@@ -45,9 +45,9 @@
                 <div>
                     <select name="Price" id="price" required>
                     <option value=""></option>
-                    <option value="$">$</option>
-                    <option value="$$">$$</option>
-                    <option value="$$$">$$$</option>
+                    <option value="$" {% if truck.Price == '$' %} selected {% endif %}>$</option>
+                    <option value="$$" {% if truck.Price == '$$' %} selected {% endif %} >$$</option>
+                    <option value="$$$" {% if truck.Price == '$$$' %} selected {% endif %}>$$$</option>
                     </select>
                 </div>
             </div>
@@ -57,8 +57,8 @@
                 <div>
                     <select name="Vegan" id="price" required>
                     <option value=""></option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
+                    <option value="Yes" {% if truck.vegan_options == 'Yes' %} selected {% endif %} >Yes</option>
+                    <option value="No" {% if truck.vegan_options == 'No' %} selected {% endif %} >No</option>
                     </select>
                 </div>
             </div>
