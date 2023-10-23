@@ -30,6 +30,7 @@
         </form>
 
         <form action="/ViewAllFood" style="display:inline-block;">
+<<<<<<< HEAD
             <input type="submit" value="View all CartCritic reviews" class="BaseNav"/>
         </form>
 
@@ -39,6 +40,17 @@
         
         <form action="/AddFoodTruck" style="display:inline-block;">
             <input type="submit" value="Add New CartCritic Review" class="BaseNav"/>
+=======
+            <input type="submit" value="View all FoodTruck reviews" class="{% if active_page == 'ViewAllFood' %}active{% endif %} BaseNav"/>
+        </form>
+
+        <form action="/ViewMyFood" style="display:inline-block;">
+            <input type="submit" value="Your FoodTruck Reviews" class=" {% if active_page == 'ViewMyFood' %}active{% endif %} BaseNav"/>
+        </form>
+        
+        <form action="/AddFoodTruck" style="display:inline-block;"> 
+            <input type="submit" value="Add New FoodTruck Review" class="{% if active_page == 'AddFoodTruck' %}active{% endif %} BaseNav"/>
+>>>>>>> 0636f8e5ce1bf7919c74b7e5d9e170dc5ad8eccb
         </form>
     </div>
 

@@ -43,7 +43,11 @@ def RootPage():
 @app.route('/AddFoodTruck')
 def AddFoodPage():
     User = session['username']
+<<<<<<< HEAD
     return render_template('AddFoodTruck.html')
+=======
+    return render_template('AddFoodTruck.html',  User=User, active_page='AddFoodTruck')
+>>>>>>> 0636f8e5ce1bf7919c74b7e5d9e170dc5ad8eccb
 
 @app.route('/AddFoodTruck', methods=['POST'])
 def addFoodTruck():
@@ -88,7 +92,12 @@ def SearchCuisine():
         })
         return render_template('SearchCuisine.html', filteredFoodTruck = filteredFoodtruck)
     else:
+<<<<<<< HEAD
         return render_template('SearchCuisine.html', filteredFoodTruck = all_food_trucks)
+=======
+        filteredFoodtruck = food_trucks_collection.find()
+        return render_template('SearchCuisine.html', filteredFoodTruck = [],  User=User, active_page='SearchCuisine')
+>>>>>>> 0636f8e5ce1bf7919c74b7e5d9e170dc5ad8eccb
             
     
 @app.route('/ViewAllFood')
@@ -96,14 +105,22 @@ def ViewAllFood():
     
     food_trucks_collection = db['food_trucks_information']  # Assuming 'food_trucks' is your collection name
     all_food_trucks = food_trucks_collection.find()
+<<<<<<< HEAD
     return render_template('ViewAllFood.html', all_food_trucks=all_food_trucks)
+=======
+    return render_template('ViewAllFood.html', all_food_trucks=all_food_trucks, User=User, active_page='ViewAllFood')
+>>>>>>> 0636f8e5ce1bf7919c74b7e5d9e170dc5ad8eccb
 
 @app.route('/ViewMyFood')
 def ViewMyFood():
    
     food_trucks_collection = db['food_trucks_information']
     AllMyFoodTrucks = food_trucks_collection.find({"User": session["username"]})
+<<<<<<< HEAD
     return render_template('ViewMyFood.html', AllMyFoodTrucks=AllMyFoodTrucks)
+=======
+    return render_template('ViewMyFood.html', AllMyFoodTrucks=AllMyFoodTrucks, User=User, active_page='ViewMyFood')
+>>>>>>> 0636f8e5ce1bf7919c74b7e5d9e170dc5ad8eccb
 
 
 @app.route('/DeleteTruck/<FoodTruckId>', methods=['POST'])
@@ -115,7 +132,11 @@ def DeleteTruck(FoodTruckId):
 
 @app.route('/EditTruck/<FoodTruckId>', methods=['GET'])
 def EditTruck(FoodTruckId):
+<<<<<<< HEAD
    
+=======
+    User = session['username']
+>>>>>>> 0636f8e5ce1bf7919c74b7e5d9e170dc5ad8eccb
     food_trucks_collection = db['food_trucks_information']
     TruckPage = food_trucks_collection.find({"_id": ObjectId(FoodTruckId)})
     return render_template('EditTruck.html', TruckPage=TruckPage)
