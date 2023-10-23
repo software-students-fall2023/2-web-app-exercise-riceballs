@@ -18,7 +18,6 @@ client = MongoClient(mongodb_uri)
 db = client[database_name]
 
 
-
 def register_user(username, password):
     try:
         # check if user exist 
