@@ -6,7 +6,7 @@
     <title>Document</title>
     <style>
         .BaseNav.active {
-            background-color: #007bff; /* Set your preferred highlight color here */
+            background-color: #7CB9E8; /* Set your preferred highlight color here */
             color: #fff; /* Set text color for the highlighted link */
         }
     </style>
@@ -22,35 +22,21 @@
         </div>
     </header>
 
-    <h3>Logged in as: {{User}}</h3>
-
     <div class="container">
         <form action="/SearchCuisine" style="display:inline-block;">
-            <input type="submit" value="Search for Cuisine" class=" {% if active_page == 'SearchCuisine' %}active{% endif %} BaseNav"/>
+            <input type="submit" value="Search for Cuisine" class=" {% if activePage== 'SearchCuisine' %}active{% endif %} BaseNav"/>
         </form>
 
         <form action="/ViewAllFood" style="display:inline-block;">
-<<<<<<< HEAD
-            <input type="submit" value="View all CartCritic reviews" class="BaseNav"/>
+            <input type="submit" value="View all CartCritic reviews" class=" {% if activePage == 'ViewAllFood' %}active{% endif %} BaseNav"/>
         </form>
 
         <form action="/ViewMyFood" style="display:inline-block;">
-            <input type="submit" value="Your CartCritic Reviews" class="BaseNav"/>
+            <input type="submit" value="Your CartCritic Reviews" class=" {% if activePage == 'ViewMyFood' %}active{% endif %} BaseNav"/>
         </form>
         
         <form action="/AddFoodTruck" style="display:inline-block;">
-            <input type="submit" value="Add New CartCritic Review" class="BaseNav"/>
-=======
-            <input type="submit" value="View all FoodTruck reviews" class="{% if active_page == 'ViewAllFood' %}active{% endif %} BaseNav"/>
-        </form>
-
-        <form action="/ViewMyFood" style="display:inline-block;">
-            <input type="submit" value="Your FoodTruck Reviews" class=" {% if active_page == 'ViewMyFood' %}active{% endif %} BaseNav"/>
-        </form>
-        
-        <form action="/AddFoodTruck" style="display:inline-block;"> 
-            <input type="submit" value="Add New FoodTruck Review" class="{% if active_page == 'AddFoodTruck' %}active{% endif %} BaseNav"/>
->>>>>>> 0636f8e5ce1bf7919c74b7e5d9e170dc5ad8eccb
+            <input type="submit" value="Add New CartCritic Review" class=" {% if activePage == 'AddFoodTruck' %}active{% endif %} BaseNav"/>
         </form>
     </div>
 

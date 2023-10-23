@@ -23,6 +23,11 @@ load_dotenv()  # take environment variables from .env.
 mongodb_uri = os.getenv("MONGO_URI")
 database_name = os.getenv("MONGO_DBNAME")
 
+# turn on debugging if in development mode
+if os.getenv('FLASK_ENV', 'development') == 'development':
+    # turn on debugging, if in development
+    app.debug = True # debug mnode
+
 try:
     client = MongoClient(mongodb_uri)
     db = client[database_name]
@@ -37,21 +42,14 @@ db = client[database_name]
 # root page
 @app.route('/FoodTruck')
 def RootPage():
-    User = session['username']
     return render_template('rootpage.html')
 
 @app.route('/AddFoodTruck')
 def AddFoodPage():
-    User = session['username']
-<<<<<<< HEAD
-    return render_template('AddFoodTruck.html')
-=======
-    return render_template('AddFoodTruck.html',  User=User, active_page='AddFoodTruck')
->>>>>>> 0636f8e5ce1bf7919c74b7e5d9e170dc5ad8eccb
+    return render_template('AddFoodTruck.html', activePage='AddFoodTruck')
 
 @app.route('/AddFoodTruck', methods=['POST'])
 def addFoodTruck():
-    
     if request.method == 'POST':
         FoodCartName = request.form['FoodCartName']
         Cuisine = request.form['Cuisine']
@@ -90,14 +88,9 @@ def SearchCuisine():
         filteredFoodtruck = food_trucks_collection.find({
             "Cuisine":{ "$regex" : cuisineQ, "$options" : "i"}
         })
-        return render_template('SearchCuisine.html', filteredFoodTruck = filteredFoodtruck)
+        return render_template('SearchCuisine.html', filteredFoodTruck = filteredFoodtruck,  activePage='SearchCuisine')
     else:
-<<<<<<< HEAD
-        return render_template('SearchCuisine.html', filteredFoodTruck = all_food_trucks)
-=======
-        filteredFoodtruck = food_trucks_collection.find()
-        return render_template('SearchCuisine.html', filteredFoodTruck = [],  User=User, active_page='SearchCuisine')
->>>>>>> 0636f8e5ce1bf7919c74b7e5d9e170dc5ad8eccb
+        return render_template('SearchCuisine.html', filteredFoodTruck = all_food_trucks,  activePage='SearchCuisine')
             
     
 @app.route('/ViewAllFood')
@@ -105,22 +98,14 @@ def ViewAllFood():
     
     food_trucks_collection = db['food_trucks_information']  # Assuming 'food_trucks' is your collection name
     all_food_trucks = food_trucks_collection.find()
-<<<<<<< HEAD
-    return render_template('ViewAllFood.html', all_food_trucks=all_food_trucks)
-=======
-    return render_template('ViewAllFood.html', all_food_trucks=all_food_trucks, User=User, active_page='ViewAllFood')
->>>>>>> 0636f8e5ce1bf7919c74b7e5d9e170dc5ad8eccb
+    return render_template('ViewAllFood.html', all_food_trucks=all_food_trucks, activePage='ViewAllFood' )
 
 @app.route('/ViewMyFood')
 def ViewMyFood():
    
     food_trucks_collection = db['food_trucks_information']
     AllMyFoodTrucks = food_trucks_collection.find({"User": session["username"]})
-<<<<<<< HEAD
-    return render_template('ViewMyFood.html', AllMyFoodTrucks=AllMyFoodTrucks)
-=======
-    return render_template('ViewMyFood.html', AllMyFoodTrucks=AllMyFoodTrucks, User=User, active_page='ViewMyFood')
->>>>>>> 0636f8e5ce1bf7919c74b7e5d9e170dc5ad8eccb
+    return render_template('ViewMyFood.html', AllMyFoodTrucks=AllMyFoodTrucks, activePage='ViewMyFood')
 
 
 @app.route('/DeleteTruck/<FoodTruckId>', methods=['POST'])
@@ -132,14 +117,10 @@ def DeleteTruck(FoodTruckId):
 
 @app.route('/EditTruck/<FoodTruckId>', methods=['GET'])
 def EditTruck(FoodTruckId):
-<<<<<<< HEAD
    
-=======
-    User = session['username']
->>>>>>> 0636f8e5ce1bf7919c74b7e5d9e170dc5ad8eccb
     food_trucks_collection = db['food_trucks_information']
     TruckPage = food_trucks_collection.find({"_id": ObjectId(FoodTruckId)})
-    return render_template('EditTruck.html', TruckPage=TruckPage)
+    return render_template('EditTruck.html', TruckPage=TruckPage, activePage='ViewMyFood')
     
 
 # handle the edit page submissions 
@@ -207,5 +188,6 @@ def RegisterPage():
 
 
 
-
-app.run(host = '0.0.0.0', port = 8080)
+if __name__ == "__main__":
+    PORT = os.getenv('PORT', 5000) 
+    app.run(debug=True,port=PORT)
