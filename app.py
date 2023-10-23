@@ -33,8 +33,6 @@ except Exception as e:
 client = MongoClient(mongodb_uri)
 db = client[database_name]
 
-# make a connection to db
-# connection = pymongo.MongoClient("class-mongodb.cims.nyu.edu", 8080, )
 
 # root page
 @app.route('/FoodTruck')
