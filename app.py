@@ -164,7 +164,7 @@ def LoginPage():
             session['username'] = username
             return redirect(url_for('RootPage'))
         else:
-            error = "Login Falied: Invalid username or password."
+            error = "Login Failed: Invalid username or password."
             return render_template('Login.html', headerTitle="Login", action = '/',  register=True, error=error)
         
 

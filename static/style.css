@@ -108,8 +108,8 @@ h1, h2, h3{
 }
 
 a {
-    text-decoration: none; /* Removes underline */
-    color: inherit; /* Inherits color from parent */
+    text-decoration: none; 
+    color: inherit; 
 }
 
 .food-trucks-container{
