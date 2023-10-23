@@ -23,6 +23,11 @@ load_dotenv()  # take environment variables from .env.
 mongodb_uri = os.getenv("MONGO_URI")
 database_name = os.getenv("MONGO_DBNAME")
 
+# turn on debugging if in development mode
+if os.getenv('FLASK_ENV', 'development') == 'development':
+    # turn on debugging, if in development
+    app.debug = True # debug mnode
+
 try:
     client = MongoClient(mongodb_uri)
     db = client[database_name]
@@ -33,23 +38,18 @@ except Exception as e:
 client = MongoClient(mongodb_uri)
 db = client[database_name]
 
-# make a connection to db
-# connection = pymongo.MongoClient("class-mongodb.cims.nyu.edu", 8080, )
 
 # root page
 @app.route('/FoodTruck')
 def RootPage():
-    User = session['username']
-    return render_template('rootpage.html', User=User)
+    return render_template('rootpage.html')
 
 @app.route('/AddFoodTruck')
 def AddFoodPage():
-    User = session['username']
-    return render_template('AddFoodTruck.html',  User=User)
+    return render_template('AddFoodTruck.html', activePage='AddFoodTruck')
 
 @app.route('/AddFoodTruck', methods=['POST'])
 def addFoodTruck():
-    
     if request.method == 'POST':
         FoodCartName = request.form['FoodCartName']
         Cuisine = request.form['Cuisine']
@@ -71,41 +71,41 @@ def addFoodTruck():
 
         food_trucks_collection = db['food_trucks_information']
         food_trucks_collection.insert_one(FoodTruckData)
-        return redirect(url_for('RootPage'))  
+        return redirect(url_for('ViewMyFood'))  
     
 
 
 @app.route('/SearchCuisine')
 def SearchCuisine():
-    User = session['username']
+    
     filteredFoodtruck = []
     food_trucks_collection = db['food_trucks_information']
+    all_food_trucks = food_trucks_collection.find()
     print(request.args.get("cuisine"))
     if request.args.get('cuisine') != None:
         cuisineQ = request.args['cuisine']
         print(cuisineQ)
         filteredFoodtruck = food_trucks_collection.find({
-            "Cuisine":cuisineQ
+            "Cuisine":{ "$regex" : cuisineQ, "$options" : "i"}
         })
-        return render_template('SearchCuisine.html', filteredFoodTruck = filteredFoodtruck,  User=User)
+        return render_template('SearchCuisine.html', filteredFoodTruck = filteredFoodtruck,  activePage='SearchCuisine')
     else:
-        filteredFoodtruck = food_trucks_collection.find()
-        return render_template('SearchCuisine.html', filteredFoodTruck = [],  User=User)
+        return render_template('SearchCuisine.html', filteredFoodTruck = all_food_trucks,  activePage='SearchCuisine')
             
     
 @app.route('/ViewAllFood')
 def ViewAllFood():
-    User = session['username']
+    
     food_trucks_collection = db['food_trucks_information']  # Assuming 'food_trucks' is your collection name
     all_food_trucks = food_trucks_collection.find()
-    return render_template('ViewAllFood.html', all_food_trucks=all_food_trucks, User=User)
+    return render_template('ViewAllFood.html', all_food_trucks=all_food_trucks, activePage='ViewAllFood' )
 
 @app.route('/ViewMyFood')
 def ViewMyFood():
-    User = session['username']
+   
     food_trucks_collection = db['food_trucks_information']
     AllMyFoodTrucks = food_trucks_collection.find({"User": session["username"]})
-    return render_template('ViewMyFood.html', AllMyFoodTrucks=AllMyFoodTrucks, User=User)
+    return render_template('ViewMyFood.html', AllMyFoodTrucks=AllMyFoodTrucks, activePage='ViewMyFood')
 
 
 @app.route('/DeleteTruck/<FoodTruckId>', methods=['POST'])
@@ -117,9 +117,10 @@ def DeleteTruck(FoodTruckId):
 
 @app.route('/EditTruck/<FoodTruckId>', methods=['GET'])
 def EditTruck(FoodTruckId):
+   
     food_trucks_collection = db['food_trucks_information']
     TruckPage = food_trucks_collection.find({"_id": ObjectId(FoodTruckId)})
-    return render_template('EditTruck.html', TruckPage=TruckPage, User=User)
+    return render_template('EditTruck.html', TruckPage=TruckPage, activePage='ViewMyFood')
     
 
 # handle the edit page submissions 
@@ -178,7 +179,7 @@ def RegisterPage():
         if register_user(name, pwd):
             # Registration successful, print a message and redirect
             print(f"User '{name}' registered successfully.")
-            return redirect(url_for('RootPage'))
+            return redirect(url_for('LoginPage'))
         else:
             # Registration failed, print an error message
             print(f"Failed to register user '{name}'.")
@@ -187,5 +188,6 @@ def RegisterPage():
 
 
 
-
-app.run(host = '0.0.0.0', port = 8080)
+if __name__ == "__main__":
+    PORT = os.getenv('PORT', 5000) 
+    app.run(debug=True,port=PORT)

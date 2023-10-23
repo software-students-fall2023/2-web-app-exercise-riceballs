@@ -15,9 +15,11 @@
             const navLinks = document.querySelectorAll(".BaseNav");
             navLinks.forEach(function(link) {
                 link.addEventListener("click", function() {
+                    // Remove the "active" class from all links
                     navLinks.forEach(function(navLink) {
                         navLink.classList.remove("active");
                     });
+                    // Add the "active" class to the clicked link
                     this.classList.add("active");
                 });
             });
@@ -30,27 +32,25 @@
     </form>
     <header>
         <div class="header">
-            <a href="/FoodTruck"><h1 style="text-align:center">Welcome to FoodTruck</h1></a>
+            <a href="/FoodTruck"><h1 style="text-align:center">Welcome to CartCritic</h1></a>
         </div>
     </header>
 
-    <h3>Logged in as: {{User}}</h3>
-
     <div class="container">
         <form action="/SearchCuisine" style="display:inline-block;">
-            <input type="submit" value="Search for Cuisine" class="BaseNav"/>
+            <input type="submit" value="Search for Cuisine" class=" {% if activePage== 'SearchCuisine' %}active{% endif %} BaseNav"/>
         </form>
 
         <form action="/ViewAllFood" style="display:inline-block;">
-            <input type="submit" value="View all FoodTruck reviews" class="BaseNav"/>
+            <input type="submit" value="View all CartCritic reviews" class=" {% if activePage == 'ViewAllFood' %}active{% endif %} BaseNav"/>
         </form>
 
         <form action="/ViewMyFood" style="display:inline-block;">
-            <input type="submit" value="Your FoodTruck Reviews" class="BaseNav"/>
+            <input type="submit" value="Your CartCritic Reviews" class=" {% if activePage == 'ViewMyFood' %}active{% endif %} BaseNav"/>
         </form>
         
         <form action="/AddFoodTruck" style="display:inline-block;">
-            <input type="submit" value="Add New FoodTruck Review" class="BaseNav"/>
+            <input type="submit" value="Add New CartCritic Review" class=" {% if activePage == 'AddFoodTruck' %}active{% endif %} BaseNav"/>
         </form>
     </div>
 
