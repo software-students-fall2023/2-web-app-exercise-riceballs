@@ -7,6 +7,18 @@
     <title>Search By Cuisine type</title>
     <style>     
         @media screen and (max-width: 768px) {
+            .food-trucks-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .food-truck-divs {
+                width: 90%;
+                margin: 10px;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
             body {
                 font-size: 16px; 
             }
@@ -54,7 +66,7 @@
             .search-button:hover {
                 background-color: #45A049; 
             }
-  
+           
     </style>
 </head>
 <body>
@@ -67,26 +79,17 @@
             </form>
         </div>
         
-        <b><h1>FoodTruck Result:</h1></b>
-        <div>
-            <table>
-                <tr>
-                    <th><b>Name</b></th>
-                    <th><b>Cuisine</b></th>
-                    <th><b>Hours</b></th>
-                    <th><b>Price</b></th>
-                    <th><b>Address</b></th>
-                </tr>
-                {% for foodtruck in filteredFoodTruck %}
-                <tr>  
-                    <td>{{ foodtruck.FoodCartName }}</td>
-                    <td>{{ foodtruck.Cuisine }}</td>
-                    <td>{{ foodtruck.Hours }}</td>
-                    <td>{{ foodtruck.Price }}</td>
-                    <td>{{ foodtruck.Address }}</td>
-                </tr>
-                {% endfor %}
-            </table>
+        <div class="food-trucks-container">
+            {% for truck in filteredFoodTruck %}
+            <div class="food-truck-divs">
+                <h3>{{ truck.FoodCartName }}</h3>
+                <p><strong>Cuisine:</strong> {{ truck.Cuisine }}</p>
+                <p><strong>Hours:</strong> {{ truck.Hours }}</p>
+                <p><strong>Address:</strong> {{ truck.Address }}</p>
+                <p><strong>Price:</strong> {{ truck.Price }}</p>
+                <p><strong>Vegan Options:</strong> {{ truck.vegan_options }}</p>
+            </div>
+            {% endfor %}
         </div>
     {% endblock %}
 </body>
